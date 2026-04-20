@@ -1,0 +1,1911 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Planner BB Escriturário 2024/2025</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0f0f13;
+  --surface: #17171f;
+  --surface2: #1e1e28;
+  --surface3: #252533;
+  --border: #2e2e3e;
+  --text: #e8e8f0;
+  --text-muted: #8888aa;
+  --text-dim: #555570;
+
+  --lp: #4f8ef7;      /* Língua Portuguesa - azul */
+  --li: #a78bfa;      /* Língua Inglesa - violeta */
+  --mat: #34d399;     /* Matemática - verde */
+  --mf: #fb923c;      /* Matemática Financeira - laranja */
+  --cb: #f59e0b;      /* Conhecimentos Bancários - âmbar */
+  --inf: #ec4899;     /* Informática - rosa */
+  --vn: #06b6d4;      /* Vendas e Negociação - ciano */
+  --amf: #a3e635;     /* Atualidades Mercado Financeiro - lima */
+  --red: #ef4444;     /* Redação */
+
+  --high: #ef4444;    /* Alta incidência */
+  --med: #f59e0b;     /* Média */
+  --low: #6b7280;     /* Baixa */
+
+  --radius: 10px;
+  --radius-sm: 6px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  font-size: 14px;
+}
+
+/* ── HEADER ── */
+.header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  position: sticky; top: 0; z-index: 100;
+  display: flex; align-items: center; gap: 16px;
+}
+.header-logo {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800; font-size: 18px;
+  color: var(--text);
+  padding: 16px 0;
+  white-space: nowrap;
+}
+.header-logo span { color: var(--lp); }
+
+/* ── MAIN TABS ── */
+.main-tabs {
+  display: flex; gap: 2px; align-items: center;
+  overflow-x: auto; flex: 1;
+  scrollbar-width: none;
+}
+.main-tabs::-webkit-scrollbar { display: none; }
+.tab-btn {
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px; font-weight: 600;
+  padding: 18px 16px;
+  border: none; background: transparent;
+  color: var(--text-muted); cursor: pointer;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap; transition: all .2s;
+  letter-spacing: .3px;
+}
+.tab-btn:hover { color: var(--text); }
+.tab-btn.active { color: var(--lp); border-bottom-color: var(--lp); }
+
+/* ── CONTENT ── */
+.content { padding: 24px; max-width: 1400px; margin: 0 auto; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ── SECTION HEADER ── */
+.section-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 20px; flex-wrap: wrap; gap: 12px;
+}
+.section-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 22px; font-weight: 700;
+}
+.section-sub {
+  font-size: 13px; color: var(--text-muted); margin-top: 2px;
+}
+
+/* ── WEEK TABS ── */
+.week-tabs-bar {
+  display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px;
+}
+.week-tab-btn {
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px; font-weight: 600;
+  padding: 6px 14px; border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--surface); color: var(--text-muted);
+  cursor: pointer; transition: all .2s;
+}
+.week-tab-btn:hover { border-color: var(--lp); color: var(--text); }
+.week-tab-btn.active { background: var(--lp); border-color: var(--lp); color: #fff; }
+
+/* ── VIEW TOGGLE ── */
+.view-toggle {
+  display: flex; gap: 0; border: 1px solid var(--border); border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+.view-btn {
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px; font-weight: 600;
+  padding: 7px 14px; border: none;
+  background: transparent; color: var(--text-muted);
+  cursor: pointer; transition: all .2s;
+}
+.view-btn.active { background: var(--lp); color: #fff; }
+
+/* ── DAYS GRID ── */
+.days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 12px;
+}
+@media (max-width: 900px) {
+  .days-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 600px) {
+  .days-grid { grid-template-columns: 1fr 1fr; }
+}
+
+.day-col {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.day-header {
+  padding: 10px 12px;
+  background: var(--surface2);
+  border-bottom: 1px solid var(--border);
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px; font-weight: 700;
+  letter-spacing: .5px; text-transform: uppercase;
+  color: var(--text-muted);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.day-header.special { color: var(--cb); }
+.day-header.sunday { color: var(--amf); }
+.day-body { padding: 8px; display: flex; flex-direction: column; gap: 8px; min-height: 180px; }
+.day-body.kanban-drop { min-height: 200px; }
+
+/* ── TOPIC CARD ── */
+.topic-card {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px;
+  cursor: grab;
+  position: relative;
+  transition: box-shadow .2s, transform .2s;
+  border-left: 3px solid transparent;
+}
+.topic-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.4); transform: translateY(-1px); }
+.topic-card.dragging { opacity: .4; transform: scale(.97); }
+.topic-card .card-subject {
+  font-family: 'Outfit', sans-serif;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: .4px; text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.topic-card .card-topic {
+  font-size: 12px; font-weight: 500; color: var(--text);
+  line-height: 1.4; margin-bottom: 8px;
+}
+.card-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
+.tag {
+  font-family: 'Outfit', sans-serif;
+  font-size: 10px; font-weight: 600;
+  padding: 2px 7px; border-radius: 20px;
+  letter-spacing: .2px;
+}
+.tag-inc-high { background: rgba(239,68,68,.15); color: var(--high); border: 1px solid rgba(239,68,68,.3); }
+.tag-inc-med  { background: rgba(245,158,11,.15); color: var(--med);  border: 1px solid rgba(245,158,11,.3); }
+.tag-inc-low  { background: rgba(107,114,128,.15); color: var(--low); border: 1px solid rgba(107,114,128,.3); }
+
+.card-controls {
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+}
+.status-select, .method-select {
+  font-family: 'Outfit', sans-serif;
+  font-size: 10px; font-weight: 600;
+  padding: 3px 7px; border-radius: 4px;
+  border: 1px solid var(--border);
+  background: var(--surface3); color: var(--text-muted);
+  cursor: pointer; flex: 1; min-width: 80px;
+}
+.status-select option, .method-select option { background: var(--surface3); }
+.status-select.s-iniciado { border-color: var(--lp); color: var(--lp); }
+.status-select.s-revisar  { border-color: var(--med); color: var(--med); }
+.status-select.s-finalizado { border-color: var(--mat); color: var(--mat); }
+
+.card-actions { display: flex; gap: 4px; }
+.btn-icon {
+  width: 24px; height: 24px; border-radius: 4px;
+  border: none; background: var(--surface3); color: var(--text-muted);
+  cursor: pointer; font-size: 12px; display: flex; align-items: center; justify-content: center;
+  transition: all .15s;
+}
+.btn-icon:hover { background: var(--border); color: var(--text); }
+.btn-icon.del:hover { background: rgba(239,68,68,.2); color: var(--high); }
+
+/* Add topic button */
+.add-topic-btn {
+  width: 100%; padding: 8px;
+  border: 1px dashed var(--border); border-radius: var(--radius-sm);
+  background: transparent; color: var(--text-dim);
+  cursor: pointer; font-size: 12px;
+  font-family: 'DM Sans', sans-serif;
+  transition: all .2s; margin-top: 4px;
+}
+.add-topic-btn:hover { border-color: var(--lp); color: var(--lp); }
+
+/* ── KANBAN VIEW ── */
+.kanban-board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+@media (max-width: 700px) { .kanban-board { grid-template-columns: 1fr; } }
+.kanban-col {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.kanban-col-header {
+  padding: 12px 16px;
+  background: var(--surface2);
+  border-bottom: 1px solid var(--border);
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px; font-weight: 700;
+  display: flex; align-items: center; gap: 8px;
+}
+.kanban-count {
+  font-size: 11px; font-weight: 600;
+  padding: 2px 8px; border-radius: 10px;
+  background: var(--surface3); color: var(--text-muted);
+}
+.kanban-col-body {
+  padding: 10px;
+  min-height: 200px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+
+/* ── MATÉRIAS TAB ── */
+.subjects-list { display: flex; flex-direction: column; gap: 16px; }
+.subject-block {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.subject-block-header {
+  padding: 14px 18px;
+  display: flex; align-items: center; gap: 12px;
+  cursor: pointer; user-select: none;
+  transition: background .2s;
+}
+.subject-block-header:hover { background: var(--surface2); }
+.subject-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+.subject-name {
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px; font-weight: 700; flex: 1;
+}
+.subject-meta {
+  display: flex; gap: 10px; align-items: center;
+  font-size: 12px; color: var(--text-muted);
+}
+.subject-pts {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700; font-size: 13px;
+}
+.subject-toggle { color: var(--text-dim); font-size: 12px; transition: transform .2s; }
+.subject-toggle.open { transform: rotate(180deg); }
+.subject-body {
+  padding: 0 18px 16px;
+  display: none;
+}
+.subject-body.open { display: block; }
+.topics-table { width: 100%; border-collapse: collapse; }
+.topics-table th {
+  font-family: 'Outfit', sans-serif;
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .5px;
+  color: var(--text-dim); padding: 8px 10px;
+  text-align: left; border-bottom: 1px solid var(--border);
+}
+.topics-table td {
+  padding: 9px 10px; font-size: 13px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+.topics-table tr:last-child td { border-bottom: none; }
+.topics-table tr:hover td { background: var(--surface2); }
+.topic-num {
+  font-family: 'Outfit', sans-serif;
+  font-size: 11px; font-weight: 700;
+  color: var(--text-dim); width: 32px;
+}
+
+/* ── ESTATÍSTICAS (KANBAN PROGRESS) ── */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+}
+.stat-card-top {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 14px;
+}
+.stat-icon {
+  width: 36px; height: 36px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+}
+.stat-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px; font-weight: 700;
+}
+.stat-nums {
+  display: flex; gap: 16px; margin-bottom: 10px;
+}
+.stat-num {
+  font-family: 'Outfit', sans-serif;
+  font-size: 22px; font-weight: 800;
+}
+.stat-num-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: .5px; }
+.progress-bar {
+  height: 6px; background: var(--surface3); border-radius: 3px; overflow: hidden;
+}
+.progress-fill {
+  height: 100%; border-radius: 3px; transition: width .4s ease;
+}
+.progress-segments { display: flex; gap: 3px; margin-top: 8px; flex-wrap: wrap; }
+.seg {
+  height: 4px; flex: 1; min-width: 6px; border-radius: 2px;
+  transition: background .3s;
+}
+.seg.done { background: var(--mat); }
+.seg.review { background: var(--med); }
+.seg.started { background: var(--lp); }
+.seg.pending { background: var(--surface3); }
+
+/* Overall stats */
+.overall-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px; margin-bottom: 24px;
+}
+@media (max-width: 700px) { .overall-stats { grid-template-columns: repeat(2,1fr); } }
+.overall-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px; text-align: center;
+}
+.overall-num {
+  font-family: 'Outfit', sans-serif;
+  font-size: 32px; font-weight: 800;
+}
+.overall-label {
+  font-size: 11px; color: var(--text-muted);
+  text-transform: uppercase; letter-spacing: .5px; margin-top: 4px;
+}
+
+/* ── TEMPO DE ESTUDOS ── */
+.time-tracker { display: flex; flex-direction: column; gap: 16px; }
+.time-week-selector {
+  display: flex; gap: 8px; align-items: center; flex-wrap: wrap;
+}
+.time-week-btn {
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px; font-weight: 600;
+  padding: 6px 14px; border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--surface); color: var(--text-muted);
+  cursor: pointer; transition: all .2s;
+}
+.time-week-btn:hover { border-color: var(--lp); color: var(--text); }
+.time-week-btn.active { background: var(--lp); border-color: var(--lp); color: #fff; }
+
+.time-table-wrap {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: auto;
+}
+.time-table { width: 100%; border-collapse: collapse; min-width: 700px; }
+.time-table th {
+  font-family: 'Outfit', sans-serif;
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .5px;
+  color: var(--text-dim); padding: 10px 14px;
+  text-align: left; border-bottom: 1px solid var(--border);
+  background: var(--surface2);
+  white-space: nowrap;
+}
+.time-table td {
+  padding: 8px 14px; border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+.time-table tr:last-child td { border-bottom: none; }
+.time-table tr:hover td { background: var(--surface2); }
+.time-input {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  width: 90px; padding: 5px 8px;
+  border-radius: 4px; border: 1px solid var(--border);
+  background: var(--surface3); color: var(--text);
+  text-align: center;
+}
+.time-input:focus { outline: none; border-color: var(--lp); }
+.num-input {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  width: 70px; padding: 5px 8px;
+  border-radius: 4px; border: 1px solid var(--border);
+  background: var(--surface3); color: var(--text);
+  text-align: center;
+}
+.num-input:focus { outline: none; border-color: var(--lp); }
+.pct-cell {
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px; font-weight: 700; text-align: center; min-width: 70px;
+}
+.pct-green { color: #4ade80; }
+.pct-yellow { color: #fbbf24; }
+.pct-red { color: #f87171; }
+
+.time-day-header {
+  background: var(--surface2);
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px; font-weight: 700;
+  padding: 10px 14px; color: var(--text-muted);
+  letter-spacing: .5px; text-transform: uppercase;
+}
+
+/* ── CICLOS TAB ── */
+.cycle-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 16px;
+}
+.cycle-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.cycle-card-header {
+  padding: 14px 16px;
+  background: var(--surface2);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 10px;
+}
+.cycle-card-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px; font-weight: 700; flex: 1;
+}
+.cycle-card-body { padding: 14px 16px; }
+.cycle-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 7px 0; border-bottom: 1px solid var(--border);
+}
+.cycle-row:last-child { border-bottom: none; }
+.cycle-sub-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.cycle-sub-name { flex: 1; font-size: 13px; }
+.cycle-time {
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px; font-weight: 700; color: var(--text-muted);
+}
+.cycle-total {
+  display: flex; justify-content: flex-end; margin-top: 12px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px; font-weight: 700;
+  color: var(--lp);
+  border-top: 1px solid var(--border); padding-top: 10px;
+}
+
+/* ── MODAL ── */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.7);
+  z-index: 1000; display: none;
+  align-items: center; justify-content: center;
+  padding: 20px;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px; width: 100%; max-width: 480px;
+  max-height: 90vh; overflow-y: auto;
+}
+.modal-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 18px; font-weight: 700; margin-bottom: 20px;
+}
+.form-group { margin-bottom: 14px; }
+.form-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .5px;
+  color: var(--text-muted); display: block; margin-bottom: 6px;
+}
+.form-input, .form-select, .form-textarea {
+  width: 100%; padding: 9px 12px;
+  border-radius: var(--radius-sm); border: 1px solid var(--border);
+  background: var(--surface2); color: var(--text);
+  font-family: 'DM Sans', sans-serif; font-size: 14px;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  outline: none; border-color: var(--lp);
+}
+.form-select option { background: var(--surface2); }
+.form-textarea { resize: vertical; min-height: 80px; }
+.modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; }
+.btn { 
+  font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 700;
+  padding: 9px 20px; border-radius: var(--radius-sm); border: none; cursor: pointer;
+  transition: all .15s;
+}
+.btn-primary { background: var(--lp); color: #fff; }
+.btn-primary:hover { filter: brightness(1.1); }
+.btn-ghost { background: var(--surface2); color: var(--text-muted); }
+.btn-ghost:hover { background: var(--border); color: var(--text); }
+.btn-danger { background: rgba(239,68,68,.15); color: var(--high); border: 1px solid rgba(239,68,68,.3); }
+.btn-danger:hover { background: rgba(239,68,68,.25); }
+
+/* ── CONFIRM MODAL ── */
+.confirm-modal {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.7);
+  z-index: 2000; display: none;
+  align-items: center; justify-content: center;
+}
+.confirm-modal.open { display: flex; }
+.confirm-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px; max-width: 360px; width: 90%;
+  text-align: center;
+}
+.confirm-icon { font-size: 32px; margin-bottom: 12px; }
+.confirm-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 17px; font-weight: 700; margin-bottom: 8px;
+}
+.confirm-text { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; }
+.confirm-actions { display: flex; gap: 10px; justify-content: center; }
+
+/* Toast */
+.toast {
+  position: fixed; bottom: 24px; right: 24px;
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 18px; font-size: 13px;
+  font-family: 'Outfit', sans-serif; font-weight: 600;
+  z-index: 3000; transform: translateY(80px); opacity: 0;
+  transition: all .3s;
+}
+.toast.show { transform: translateY(0); opacity: 1; }
+.toast.success { border-left: 3px solid var(--mat); color: var(--mat); }
+.toast.info { border-left: 3px solid var(--lp); color: var(--lp); }
+
+/* scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--surface); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+/* ── EXPORT/IMPORT ── */
+.io-bar {
+  display: flex; gap: 8px; align-items: center;
+  padding: 8px 24px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  font-size: 12px;
+}
+.io-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .5px;
+  color: var(--text-dim); margin-right: 4px;
+}
+.btn-io {
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px; font-weight: 700;
+  padding: 6px 14px; border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface2); color: var(--text-muted);
+  cursor: pointer; transition: all .2s;
+  display: flex; align-items: center; gap: 6px;
+}
+.btn-io:hover { border-color: var(--lp); color: var(--text); }
+.btn-io.export:hover { border-color: var(--mat); color: var(--mat); }
+.btn-io.import:hover { border-color: var(--cb); color: var(--cb); }
+#importFileInput { display: none; }
+
+.import-modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.75);
+  z-index: 1500; display: none;
+  align-items: center; justify-content: center;
+  padding: 20px;
+}
+.import-modal-overlay.open { display: flex; }
+.import-modal {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px; width: 100%; max-width: 440px;
+}
+.import-modal-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 18px; font-weight: 700; margin-bottom: 6px;
+}
+.import-modal-sub {
+  font-size: 13px; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5;
+}
+.drop-zone {
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 32px 20px; text-align: center;
+  cursor: pointer; transition: all .2s;
+  margin-bottom: 16px;
+}
+.drop-zone:hover, .drop-zone.dragover {
+  border-color: var(--cb); background: rgba(245,158,11,.05);
+}
+.drop-zone-icon { font-size: 32px; margin-bottom: 8px; }
+.drop-zone-text {
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px; font-weight: 600; color: var(--text-muted);
+}
+.drop-zone-sub { font-size: 11px; color: var(--text-dim); margin-top: 4px; }
+.import-preview {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px; margin-bottom: 16px;
+  display: none;
+}
+.import-preview.visible { display: block; }
+.import-preview-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px; font-weight: 700;
+  color: var(--mat); margin-bottom: 8px;
+  text-transform: uppercase; letter-spacing: .4px;
+}
+.import-preview-info { font-size: 12px; color: var(--text-muted); line-height: 1.8; }
+.import-warning {
+  background: rgba(239,68,68,.1);
+  border: 1px solid rgba(239,68,68,.3);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px; font-size: 12px;
+  color: #fca5a5; margin-bottom: 16px; line-height: 1.5;
+  display: none;
+}
+.import-warning.visible { display: block; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-logo">BB <span>Planner</span> · Escriturário</div>
+  <nav class="main-tabs" id="mainTabs">
+    <button class="tab-btn active" data-tab="weekly">📅 Planejamento Semanal</button>
+    <button class="tab-btn" data-tab="cycles">🔄 Ciclos de Estudo</button>
+    <button class="tab-btn" data-tab="subjects">📚 Matérias</button>
+    <button class="tab-btn" data-tab="stats">📊 Estatísticas</button>
+    <button class="tab-btn" data-tab="time">⏱ Tempo de Estudos</button>
+  </nav>
+</header>
+
+
+<!-- IO BAR -->
+<div class="io-bar">
+  <span class="io-label">Backup</span>
+  <button class="btn-io export" onclick="exportJSON()" title="Exportar planejamento como arquivo JSON">⬇️ Exportar JSON</button>
+  <button class="btn-io import" onclick="openImportModal()" title="Importar planejamento de outro computador">⬆️ Importar JSON</button>
+  <span id="lastSavedLabel" style="margin-left:auto;font-family:Outfit,sans-serif;font-size:11px;color:var(--text-dim)"></span>
+</div>
+<!-- ═══════════════════ TAB: PLANEJAMENTO SEMANAL ═══════════════════ -->
+<div class="content">
+<div class="tab-panel active" id="tab-weekly">
+  <div class="section-header">
+    <div>
+      <div class="section-title">Planejamento Semanal</div>
+      <div class="section-sub">Arraste os tópicos entre os dias. Sábado = Redação. Domingo = Simulado/Revisão.</div>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+      <div class="view-toggle">
+        <button class="view-btn active" id="btnViewDays" onclick="switchView('days')">Por Dias</button>
+        <button class="view-btn" id="btnViewKanban" onclick="switchView('kanban')">Kanban</button>
+      </div>
+      <button class="btn btn-primary" onclick="openAddModal()">+ Adicionar Tópico</button>
+    </div>
+  </div>
+
+  <div class="week-tabs-bar" id="weekTabsBar"></div>
+
+  <!-- DAYS VIEW -->
+  <div id="daysView">
+    <div class="days-grid" id="daysGrid"></div>
+  </div>
+
+  <!-- KANBAN VIEW -->
+  <div id="kanbanView" style="display:none">
+    <div class="kanban-board">
+      <div class="kanban-col">
+        <div class="kanban-col-header" style="color:var(--lp)">
+          ◉ Iniciado <span class="kanban-count" id="kc-iniciado">0</span>
+        </div>
+        <div class="kanban-col-body kanban-drop" id="kb-iniciado" ondragover="kbDragOver(event)" ondrop="kbDrop(event,'Iniciado')"></div>
+      </div>
+      <div class="kanban-col">
+        <div class="kanban-col-header" style="color:var(--med)">
+          ⟳ Revisar <span class="kanban-count" id="kc-revisar">0</span>
+        </div>
+        <div class="kanban-col-body kanban-drop" id="kb-revisar" ondragover="kbDragOver(event)" ondrop="kbDrop(event,'Revisar')"></div>
+      </div>
+      <div class="kanban-col">
+        <div class="kanban-col-header" style="color:var(--mat)">
+          ✓ Finalizado <span class="kanban-count" id="kc-finalizado">0</span>
+        </div>
+        <div class="kanban-col-body kanban-drop" id="kb-finalizado" ondragover="kbDragOver(event)" ondrop="kbDrop(event,'Finalizado')"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ TAB: CICLOS ═══════════════════ -->
+<div class="tab-panel" id="tab-cycles">
+  <div class="section-header">
+    <div>
+      <div class="section-title">Ciclos de Estudo</div>
+      <div class="section-sub">Distribuição das 4h diárias por disciplina com base na pontuação e incidência</div>
+    </div>
+  </div>
+  <div class="cycle-grid" id="cycleGrid"></div>
+</div>
+
+<!-- ═══════════════════ TAB: MATÉRIAS ═══════════════════ -->
+<div class="tab-panel" id="tab-subjects">
+  <div class="section-header">
+    <div>
+      <div class="section-title">Conteúdo Programático</div>
+      <div class="section-sub">Conforme Edital BB 2022/001 – Agente Comercial (Escriturário)</div>
+    </div>
+  </div>
+  <div class="subjects-list" id="subjectsList"></div>
+</div>
+
+<!-- ═══════════════════ TAB: ESTATÍSTICAS ═══════════════════ -->
+<div class="tab-panel" id="tab-stats">
+  <div class="section-header">
+    <div>
+      <div class="section-title">Estatísticas de Progresso</div>
+      <div class="section-sub">Atualizado automaticamente conforme os tópicos são marcados como Finalizado</div>
+    </div>
+  </div>
+  <div class="overall-stats" id="overallStats"></div>
+  <div class="stats-grid" id="statsGrid"></div>
+</div>
+
+<!-- ═══════════════════ TAB: TEMPO DE ESTUDOS ═══════════════════ -->
+<div class="tab-panel" id="tab-time">
+  <div class="section-header">
+    <div>
+      <div class="section-title">Tempo de Estudos</div>
+      <div class="section-sub">Registre horas, questões e veja seu aproveitamento por disciplina</div>
+    </div>
+    <button class="btn btn-primary" onclick="saveTimeData()">💾 Salvar</button>
+  </div>
+  <div class="time-week-selector" id="timeWeekSelector"></div>
+  <br>
+  <div class="time-table-wrap">
+    <table class="time-table" id="timeTable">
+      <thead>
+        <tr>
+          <th>Dia / Disciplina</th>
+          <th>Tópico</th>
+          <th>Horas (hh:mm)</th>
+          <th>Questões</th>
+          <th>Erros</th>
+          <th>% Acertos</th>
+        </tr>
+      </thead>
+      <tbody id="timeTableBody"></tbody>
+    </table>
+  </div>
+</div>
+</div><!-- /content -->
+
+<!-- ═══════════════════ MODAIS ═══════════════════ -->
+<div class="modal-overlay" id="addModal">
+  <div class="modal">
+    <div class="modal-title" id="modalTitle">Adicionar Tópico</div>
+    <div class="form-group">
+      <label class="form-label">Semana</label>
+      <select class="form-select" id="fWeek"></select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Dia da Semana</label>
+      <select class="form-select" id="fDay">
+        <option value="0">Segunda-feira</option>
+        <option value="1">Terça-feira</option>
+        <option value="2">Quarta-feira</option>
+        <option value="3">Quinta-feira</option>
+        <option value="4">Sexta-feira</option>
+        <option value="5">Sábado (Redação)</option>
+        <option value="6">Domingo (Simulado)</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Disciplina</label>
+      <select class="form-select" id="fSubject" onchange="updateTopicList()"></select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Tópico</label>
+      <select class="form-select" id="fTopic"></select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Observação (opcional)</label>
+      <textarea class="form-textarea" id="fNote" placeholder="Ex: Focar em questões da Cesgranrio..."></textarea>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Método</label>
+      <select class="form-select" id="fMethod">
+        <option value="Aula">Aula</option>
+        <option value="Questões">Questões</option>
+        <option value="Leitura">Leitura</option>
+      </select>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeAddModal()">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveCard()">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<div class="confirm-modal" id="confirmModal">
+  <div class="confirm-box">
+    <div class="confirm-icon">🗑️</div>
+    <div class="confirm-title">Excluir tópico?</div>
+    <div class="confirm-text">Esta ação não pode ser desfeita.</div>
+    <div class="confirm-actions">
+      <button class="btn btn-ghost" onclick="closeConfirm()">Cancelar</button>
+      <button class="btn btn-danger" onclick="confirmDelete()">Excluir</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- ═══════════════════ IMPORT MODAL ═══════════════════ -->
+<input type="file" id="importFileInput" accept=".json" onchange="handleFileSelect(event)">
+
+<div class="import-modal-overlay" id="importModal">
+  <div class="import-modal">
+    <div class="import-modal-title">⬆️ Importar Planejamento</div>
+    <div class="import-modal-sub">
+      Selecione ou arraste um arquivo <strong>.json</strong> exportado anteriormente.<br>
+      Os dados atuais serão substituídos pelo conteúdo do arquivo.
+    </div>
+
+    <div class="drop-zone" id="dropZone"
+      onclick="document.getElementById('importFileInput').click()"
+      ondragover="dropZoneDragOver(event)"
+      ondragleave="dropZoneDragLeave(event)"
+      ondrop="dropZoneDrop(event)">
+      <div class="drop-zone-icon">📂</div>
+      <div class="drop-zone-text">Clique para selecionar o arquivo</div>
+      <div class="drop-zone-sub">ou arraste e solte aqui · apenas .json</div>
+    </div>
+
+    <div class="import-preview" id="importPreview">
+      <div class="import-preview-title">✅ Arquivo válido — Prévia</div>
+      <div class="import-preview-info" id="importPreviewInfo"></div>
+    </div>
+
+    <div class="import-warning visible" id="importWarning">
+      ⚠️ <strong>Atenção:</strong> ao confirmar, todo o planejamento atual será <strong>substituído</strong> pelo arquivo importado. Exporte primeiro se quiser manter um backup.
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeImportModal()">Cancelar</button>
+      <button class="btn btn-primary" id="btnConfirmImport" onclick="confirmImport()" disabled
+        style="opacity:.4;cursor:not-allowed">Confirmar Importação</button>
+    </div>
+  </div>
+</div>
+
+
+<script>
+// ═══════════════════════════════════════════════════════════
+// DATA DEFINITIONS
+// ═══════════════════════════════════════════════════════════
+const SUBJECTS = {
+  lp:  { name: 'Língua Portuguesa',       color: '#4f8ef7', pts: 15.0, qs: 10, icon: '📝' },
+  li:  { name: 'Língua Inglesa',           color: '#a78bfa', pts:  5.0, qs:  5, icon: '🌐' },
+  mat: { name: 'Matemática',               color: '#34d399', pts:  7.5, qs:  5, icon: '🔢' },
+  amf: { name: 'Atualidades Merc. Financeiro', color: '#a3e635', pts: 5.0, qs: 5, icon: '💡' },
+  mf:  { name: 'Matemática Financeira',    color: '#fb923c', pts:  7.5, qs:  5, icon: '💰' },
+  cb:  { name: 'Conhecimentos Bancários',  color: '#f59e0b', pts: 15.0, qs: 10, icon: '🏦' },
+  inf: { name: 'Informática',              color: '#ec4899', pts: 22.5, qs: 15, icon: '💻' },
+  vn:  { name: 'Vendas e Negociação',      color: '#06b6d4', pts: 22.5, qs: 15, icon: '🤝' },
+  red: { name: 'Redação',                  color: '#ef4444', pts: 0,    qs:  0, icon: '✍️' },
+};
+
+const TOPICS = {
+  lp: [
+    { t: 'Compreensão de Textos', inc: 'Alta' },
+    { t: 'Ortografia Oficial', inc: 'Alta' },
+    { t: 'Classe e Emprego de Palavras', inc: 'Alta' },
+    { t: 'Emprego do Acento Indicativo de Crase', inc: 'Média' },
+    { t: 'Sintaxe da Oração e do Período', inc: 'Alta' },
+    { t: 'Emprego dos Sinais de Pontuação', inc: 'Média' },
+    { t: 'Concordância Verbal e Nominal', inc: 'Alta' },
+    { t: 'Regência Verbal e Nominal', inc: 'Alta' },
+    { t: 'Colocação dos Pronomes Oblíquos (próclise, mesóclise, ênclise)', inc: 'Média' },
+  ],
+  li: [
+    { t: 'Vocabulário Fundamental', inc: 'Alta' },
+    { t: 'Gramática Básica para Leitura', inc: 'Alta' },
+    { t: 'Compreensão de Textos em Inglês', inc: 'Alta' },
+  ],
+  mat: [
+    { t: 'Números Inteiros, Racionais e Reais; Contagem', inc: 'Média' },
+    { t: 'Sistema Legal de Medidas', inc: 'Baixa' },
+    { t: 'Razões e Proporções; Divisão Proporcional; Regra de Três', inc: 'Alta' },
+    { t: 'Porcentagens', inc: 'Alta' },
+    { t: 'Lógica Proposicional', inc: 'Alta' },
+    { t: 'Noções de Conjuntos', inc: 'Média' },
+    { t: 'Funções Polinomiais', inc: 'Média' },
+    { t: 'Funções Exponenciais e Logarítmicas', inc: 'Média' },
+    { t: 'Matrizes', inc: 'Baixa' },
+    { t: 'Determinantes', inc: 'Baixa' },
+    { t: 'Sistemas Lineares', inc: 'Média' },
+    { t: 'Sequências – PA e PG', inc: 'Alta' },
+  ],
+  amf: [
+    { t: 'Bancos na Era Digital: tendências e desafios', inc: 'Alta' },
+    { t: 'Internet Banking e Mobile Banking', inc: 'Alta' },
+    { t: 'Open Banking / Open Finance', inc: 'Alta' },
+    { t: 'Fintechs, Startups e Big Techs', inc: 'Alta' },
+    { t: 'Shadow Banking', inc: 'Média' },
+    { t: 'Funções da Moeda', inc: 'Alta' },
+    { t: 'Blockchain, Bitcoin e Criptomoedas', inc: 'Alta' },
+    { t: 'Marketplace e Correspondentes Bancários', inc: 'Média' },
+    { t: 'PIX – Sistema de Pagamentos Instantâneos', inc: 'Alta' },
+    { t: 'Transformação Digital no SFN', inc: 'Alta' },
+  ],
+  mf: [
+    { t: 'Conceitos Gerais: Capital, Juros, Taxas, Capitalização', inc: 'Alta' },
+    { t: 'Juros Simples – Montante, Juros, Taxa, Principal, Prazo', inc: 'Alta' },
+    { t: 'Juros Compostos – Montante, Juros, Taxa, Principal, Prazo', inc: 'Alta' },
+    { t: 'Fluxo de Caixa e Equivalência Financeira', inc: 'Alta' },
+    { t: 'Sistema Price de Amortização', inc: 'Alta' },
+    { t: 'Sistema SAC de Amortização', inc: 'Alta' },
+  ],
+  cb: [
+    { t: 'SFN – Estrutura, Órgãos Normativos e Supervisores', inc: 'Alta' },
+    { t: 'Mercados Monetário, Crédito, Capitais e Cambial', inc: 'Alta' },
+    { t: 'Moeda e Política Monetária; SELIC; Quantitative Easing', inc: 'Alta' },
+    { t: 'Orçamento Público, Títulos do Tesouro e Dívida Pública', inc: 'Média' },
+    { t: 'Produtos Bancários: crédito, poupança, previdência, consórcio', inc: 'Alta' },
+    { t: 'Noções de Mercado de Capitais', inc: 'Média' },
+    { t: 'Mercado de Câmbio: regimes e operações básicas', inc: 'Alta' },
+    { t: 'Taxas de Câmbio; Impactos sobre Exportações/Importações', inc: 'Média' },
+    { t: 'Mercado Interbancário e Operações de Tesouraria', inc: 'Média' },
+    { t: 'Taxas de Juros: curto prazo, curva de juros, nominais/reais', inc: 'Média' },
+    { t: 'Garantias do SFN: aval, fiança, penhor, alienação fiduciária, hipoteca', inc: 'Alta' },
+    { t: 'Crime de Lavagem de Dinheiro – Lei 9.613/98', inc: 'Alta' },
+    { t: 'Autorregulação Bancária e Normativos SARB', inc: 'Média' },
+    { t: 'Sigilo Bancário – LC 105/2001', inc: 'Alta' },
+    { t: 'LGPD – Lei 13.709/2018', inc: 'Alta' },
+    { t: 'Legislação Anticorrupção – Lei 12.846/2013', inc: 'Média' },
+    { t: 'Segurança Cibernética – Resolução CMN 4.893/2021', inc: 'Alta' },
+    { t: 'Ética Aplicada: ética empresarial, Código de Ética BB', inc: 'Alta' },
+    { t: 'Política de Responsabilidade Socioambiental BB', inc: 'Média' },
+    { t: 'ASG (Ambiental, Social e Governança)', inc: 'Alta' },
+  ],
+  inf: [
+    { t: 'Sistemas Operacionais – Windows 10 e Linux (SUSE SLES)', inc: 'Alta' },
+    { t: 'Edição de Textos – Word O365', inc: 'Alta' },
+    { t: 'Planilhas – Excel O365', inc: 'Alta' },
+    { t: 'Apresentações – PowerPoint O365', inc: 'Alta' },
+    { t: 'Segurança da Informação: fundamentos e mecanismos', inc: 'Alta' },
+    { t: 'Proteção de Estações: USB, hardening, antimalware, firewall', inc: 'Alta' },
+    { t: 'Gerenciamento de Arquivos, Pastas e Programas', inc: 'Alta' },
+    { t: 'Redes de Computadores: conceitos básicos, internet, intranet', inc: 'Alta' },
+    { t: 'Navegadores Web (Edge 91, Firefox 78 ESR)', inc: 'Média' },
+    { t: 'Correio Eletrônico, Grupos de Discussão, Wikis', inc: 'Média' },
+    { t: 'Redes Sociais (Twitter, Facebook, LinkedIn, WhatsApp, YouTube, Instagram, Telegram)', inc: 'Média' },
+    { t: 'Sistemas de Suporte à Decisão e Business Intelligence', inc: 'Média' },
+    { t: 'Fundamentos de Análise de Dados', inc: 'Alta' },
+    { t: 'Educação a Distância: conceitos', inc: 'Baixa' },
+    { t: 'Tecnologias Multimídia', inc: 'Baixa' },
+    { t: 'Ferramentas de Produtividade (Teams, Webex, Google Drive, Skype)', inc: 'Alta' },
+  ],
+  vn: [
+    { t: 'Estratégia Empresarial: análise de mercado, forças competitivas', inc: 'Alta' },
+    { t: 'Segmentação de Mercado', inc: 'Alta' },
+    { t: 'Valor Percebido pelo Cliente', inc: 'Alta' },
+    { t: 'Gestão da Experiência do Cliente (CX)', inc: 'Alta' },
+    { t: 'Aprendizagem e Sustentabilidade Organizacional', inc: 'Média' },
+    { t: 'Características dos Serviços: intangibilidade, variabilidade...', inc: 'Alta' },
+    { t: 'Gestão da Qualidade em Serviços', inc: 'Alta' },
+    { t: 'Técnicas de Vendas: pré-abordagem ao pós-venda', inc: 'Alta' },
+    { t: 'Marketing Digital: leads, copywriting, gatilhos, Inbound', inc: 'Alta' },
+    { t: 'Ética e Conduta em Vendas', inc: 'Alta' },
+    { t: 'Padrões de Qualidade no Atendimento', inc: 'Alta' },
+    { t: 'Canais Remotos para Vendas', inc: 'Média' },
+    { t: 'Comportamento do Consumidor', inc: 'Alta' },
+    { t: 'Política de Relacionamento com Cliente – Resolução 4.949/2021', inc: 'Alta' },
+    { t: 'Ouvidoria – Resolução CMN 4.860/2020', inc: 'Média' },
+    { t: 'Lei Brasileira de Inclusão – Lei 13.146/2015', inc: 'Média' },
+    { t: 'Código de Defesa do Consumidor – Lei 8.078/1990', inc: 'Alta' },
+  ],
+  red: [
+    { t: 'Redação Dissertativo-Argumentativa', inc: 'Alta' },
+    { t: 'Coesão e Coerência Textual', inc: 'Alta' },
+    { t: 'Argumentação e Estrutura do Texto', inc: 'Alta' },
+    { t: 'Norma-Padrão e Vocabulário', inc: 'Alta' },
+  ],
+};
+
+const DAYS = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'];
+const DAY_ICONS = ['', '', '', '', '', '✍️', '🎯'];
+
+// ─── Default schedule distribution (week cycle) ───
+// Rule: LP and INF never same day; max 3 subjects/day
+// Mon–Sat content, Sun = simulado
+const DEFAULT_SCHEDULE = [
+  // [subjectKey, topicIndex, method, inc]
+  // Repeating 6-week pattern, each week covers more topics
+];
+
+// Generate default weeks with predefined structure
+function buildDefaultWeeks(n = 12) {
+  const weeks = [];
+  // subject rotation avoiding LP+INF same day, max 3 per day
+  // Pattern per day: 
+  const patterns = [
+    // Mon: LP + VN + MF
+    [['lp',0],['vn',0],['mf',0]],
+    // Tue: MAT + CB + AMF
+    [['mat',0],['cb',0],['amf',0]],
+    // Wed: INF + VN + MF
+    [['inf',0],['vn',1],['mf',1]],
+    // Thu: LP + CB + AMF
+    [['lp',1],['cb',1],['amf',1]],
+    // Fri: MAT + INF + LI
+    [['mat',1],['inf',1],['li',0]],
+    // Sat: RED
+    [['red',0],['lp',2],['vn',2]],
+    // Sun: special
+    [],
+  ];
+
+  for (let w = 0; w < n; w++) {
+    const week = { name: `Semana ${w+1}`, days: [] };
+    for (let d = 0; d < 7; d++) {
+      week.days.push({ cards: [] });
+    }
+    weeks.push(week);
+  }
+  return weeks;
+}
+
+// ─── STATE ───
+let state = {
+  weeks: buildDefaultWeeks(12),
+  currentWeek: 0,
+  currentView: 'days',
+  editingCard: null,
+  deletingCard: null,
+  timeData: {},
+  selectedTimeWeek: 0,
+};
+
+// Load from localStorage
+function loadState() {
+  try {
+    const s = localStorage.getItem('bb_planner_v2');
+    if (s) {
+      const parsed = JSON.parse(s);
+      state = { ...state, ...parsed };
+    }
+  } catch(e) {}
+}
+
+function saveState() {
+  try {
+    localStorage.setItem('bb_planner_v2', JSON.stringify(state));
+    const now = new Date().toLocaleString('pt-BR');
+    updateLastSaved('Salvo às ' + now);
+  } catch(e) {}
+}
+
+// ─── TAB SWITCHING ───
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+    if (btn.dataset.tab === 'stats') renderStats();
+    if (btn.dataset.tab === 'time') renderTimeTable();
+  });
+});
+
+// ─── WEEK TABS ───
+function renderWeekTabs() {
+  const bar = document.getElementById('weekTabsBar');
+  bar.innerHTML = state.weeks.map((w, i) =>
+    `<button class="week-tab-btn ${i===state.currentWeek?'active':''}" onclick="selectWeek(${i})">${w.name}</button>`
+  ).join('') +
+  `<button class="week-tab-btn" onclick="addWeek()" style="border-style:dashed">+ Semana</button>`;
+}
+
+function selectWeek(i) {
+  state.currentWeek = i;
+  renderWeekTabs();
+  renderDaysGrid();
+  renderTimeWeekSelector();
+}
+
+function addWeek() {
+  const n = state.weeks.length + 1;
+  state.weeks.push({ name: `Semana ${n}`, days: Array.from({length:7}, ()=>({cards:[]})) });
+  state.currentWeek = state.weeks.length - 1;
+  renderWeekTabs();
+  renderDaysGrid();
+  saveState();
+}
+
+// ─── CARD RENDERING ───
+function incTagClass(inc) {
+  if (inc === 'Alta') return 'tag-inc-high';
+  if (inc === 'Média') return 'tag-inc-med';
+  return 'tag-inc-low';
+}
+function incLabel(inc) {
+  if (inc === 'Alta') return '🔴 Alta';
+  if (inc === 'Média') return '🟡 Média';
+  return '⚪ Baixa';
+}
+function statusClass(s) {
+  if (s === 'Iniciado') return 's-iniciado';
+  if (s === 'Revisar') return 's-revisar';
+  if (s === 'Finalizado') return 's-finalizado';
+  return '';
+}
+
+function renderCard(card, weekIdx, dayIdx, cardIdx) {
+  const subj = SUBJECTS[card.subject];
+  const topicList = TOPICS[card.subject] || [];
+  const topicObj = topicList[card.topicIdx] || { t: card.customTopic || 'Tópico', inc: 'Média' };
+  return `
+  <div class="topic-card" draggable="true" 
+    style="border-left-color:${subj.color}"
+    ondragstart="dragStart(event,${weekIdx},${dayIdx},${cardIdx})"
+    id="card-${weekIdx}-${dayIdx}-${cardIdx}">
+    <div class="card-subject" style="color:${subj.color}">${subj.icon} ${subj.name}</div>
+    <div class="card-topic">${topicObj.t}</div>
+    ${card.note ? `<div style="font-size:11px;color:var(--text-muted);margin-bottom:6px;font-style:italic">${card.note}</div>` : ''}
+    <div class="card-tags">
+      <span class="tag ${incTagClass(topicObj.inc)}">${incLabel(topicObj.inc)}</span>
+      <span class="tag" style="background:rgba(255,255,255,.06);color:var(--text-muted);border:1px solid var(--border)">
+        ${card.method || 'Aula'}
+      </span>
+    </div>
+    <div class="card-controls">
+      <select class="status-select ${statusClass(card.status||'')}"
+        onchange="changeStatus(${weekIdx},${dayIdx},${cardIdx},this.value)">
+        <option ${(card.status||'')==''?'selected':''} value="">— Status —</option>
+        <option ${card.status==='Iniciado'?'selected':''} value="Iniciado">Iniciado</option>
+        <option ${card.status==='Revisar'?'selected':''} value="Revisar">Revisar</option>
+        <option ${card.status==='Finalizado'?'selected':''} value="Finalizado">Finalizado</option>
+      </select>
+      <div class="card-actions">
+        <button class="btn-icon" title="Editar" onclick="editCard(${weekIdx},${dayIdx},${cardIdx})">✏️</button>
+        <button class="btn-icon del" title="Excluir" onclick="askDelete(${weekIdx},${dayIdx},${cardIdx})">🗑</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ─── DAYS GRID ───
+function renderDaysGrid() {
+  const week = state.weeks[state.currentWeek];
+  const grid = document.getElementById('daysGrid');
+  grid.innerHTML = DAYS.map((day, di) => {
+    const isSpecial = di === 5;
+    const isSunday = di === 6;
+    const headerClass = isSunday ? 'sunday' : (isSpecial ? 'special' : '');
+    const cards = week.days[di]?.cards || [];
+    return `
+    <div class="day-col">
+      <div class="day-header ${headerClass}">
+        <span>${DAY_ICONS[di]} ${day}</span>
+        <span style="font-size:10px">${cards.length} tópico${cards.length!==1?'s':''}</span>
+      </div>
+      <div class="day-body kanban-drop"
+        ondragover="dayDragOver(event)"
+        ondrop="dayDrop(event,${di})"
+        id="daybody-${di}">
+        ${cards.map((c,ci) => renderCard(c, state.currentWeek, di, ci)).join('')}
+        <button class="add-topic-btn" onclick="openAddModal(${di})">+ Adicionar</button>
+      </div>
+    </div>`;
+  }).join('');
+  renderKanban();
+}
+
+// ─── KANBAN VIEW ───
+function renderKanban() {
+  const allCards = [];
+  state.weeks.forEach((week, wi) => {
+    week.days.forEach((day, di) => {
+      (day.cards || []).forEach((card, ci) => {
+        allCards.push({ card, wi, di, ci });
+      });
+    });
+  });
+
+  const cols = { 'Iniciado': [], 'Revisar': [], 'Finalizado': [] };
+  allCards.forEach(({card, wi, di, ci}) => {
+    const st = card.status || '';
+    if (st in cols) cols[st].push({card, wi, di, ci});
+  });
+
+  Object.entries(cols).forEach(([status, items]) => {
+    const key = status.toLowerCase().replace('ç','c');
+    const el = document.getElementById(`kb-${key === 'iniciado' ? 'iniciado' : key === 'revisar' ? 'revisar' : 'finalizado'}`);
+    const cnt = document.getElementById(`kc-${key === 'iniciado' ? 'iniciado' : key === 'revisar' ? 'revisar' : 'finalizado'}`);
+    if (!el) return;
+    cnt.textContent = items.length;
+    el.innerHTML = items.map(({card, wi, di, ci}) => renderCard(card, wi, di, ci)).join('') || 
+      `<div style="color:var(--text-dim);font-size:12px;text-align:center;padding:20px">Nenhum tópico</div>`;
+  });
+}
+
+// ─── DRAG & DROP (Days) ───
+let dragSrc = null;
+function dragStart(e, wi, di, ci) {
+  dragSrc = { wi, di, ci };
+  e.dataTransfer.effectAllowed = 'move';
+  setTimeout(() => {
+    const el = document.getElementById(`card-${wi}-${di}-${ci}`);
+    if (el) el.classList.add('dragging');
+  }, 0);
+}
+function dayDragOver(e) { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; }
+function dayDrop(e, targetDi) {
+  e.preventDefault();
+  if (!dragSrc) return;
+  const { wi, di, ci } = dragSrc;
+  const week = state.weeks[wi];
+  const card = week.days[di].cards.splice(ci, 1)[0];
+  if (!week.days[targetDi]) week.days[targetDi] = { cards: [] };
+  week.days[targetDi].cards.push(card);
+  dragSrc = null;
+  saveState(); renderDaysGrid();
+}
+
+// ─── DRAG & DROP (Kanban cols) ───
+function kbDragOver(e) { e.preventDefault(); }
+function kbDrop(e, newStatus) {
+  e.preventDefault();
+  if (!dragSrc) return;
+  const { wi, di, ci } = dragSrc;
+  state.weeks[wi].days[di].cards[ci].status = newStatus;
+  dragSrc = null;
+  saveState(); renderDaysGrid(); renderStats();
+}
+
+// ─── STATUS CHANGE ───
+function changeStatus(wi, di, ci, value) {
+  state.weeks[wi].days[di].cards[ci].status = value;
+  saveState(); renderDaysGrid(); renderStats();
+  if (value === 'Finalizado') showToast('✓ Tópico finalizado!', 'success');
+}
+
+// ─── MODAL ───
+let _preselectedDay = null;
+function openAddModal(day) {
+  _preselectedDay = day !== undefined ? day : null;
+  document.getElementById('modalTitle').textContent = state.editingCard ? 'Editar Tópico' : 'Adicionar Tópico';
+  
+  // Fill week select
+  const fWeek = document.getElementById('fWeek');
+  fWeek.innerHTML = state.weeks.map((w,i) =>
+    `<option value="${i}" ${i===state.currentWeek?'selected':''}>${w.name}</option>`
+  ).join('');
+
+  // Fill day select
+  if (_preselectedDay !== null) {
+    document.getElementById('fDay').value = _preselectedDay;
+  }
+
+  // Fill subject select
+  const fSubject = document.getElementById('fSubject');
+  fSubject.innerHTML = Object.entries(SUBJECTS).map(([k,v]) =>
+    `<option value="${k}">${v.icon} ${v.name}</option>`
+  ).join('');
+
+  if (state.editingCard) {
+    const c = state.editingCard.card;
+    fWeek.value = state.editingCard.wi;
+    document.getElementById('fDay').value = state.editingCard.di;
+    fSubject.value = c.subject;
+    updateTopicList();
+    document.getElementById('fTopic').value = c.topicIdx;
+    document.getElementById('fNote').value = c.note || '';
+    document.getElementById('fMethod').value = c.method || 'Aula';
+  } else {
+    updateTopicList();
+    document.getElementById('fNote').value = '';
+  }
+  document.getElementById('addModal').classList.add('open');
+}
+
+function updateTopicList() {
+  const subj = document.getElementById('fSubject').value;
+  const topics = TOPICS[subj] || [];
+  document.getElementById('fTopic').innerHTML = topics.map((t, i) =>
+    `<option value="${i}">[${t.inc}] ${t.t}</option>`
+  ).join('');
+}
+
+function closeAddModal() {
+  document.getElementById('addModal').classList.remove('open');
+  state.editingCard = null;
+}
+
+function saveCard() {
+  const wi = parseInt(document.getElementById('fWeek').value);
+  const di = parseInt(document.getElementById('fDay').value);
+  const subject = document.getElementById('fSubject').value;
+  const topicIdx = parseInt(document.getElementById('fTopic').value);
+  const note = document.getElementById('fNote').value.trim();
+  const method = document.getElementById('fMethod').value;
+
+  const card = { subject, topicIdx, note, method, status: '' };
+
+  if (state.editingCard) {
+    const { wi: ewi, di: edi, ci } = state.editingCard;
+    state.weeks[ewi].days[edi].cards.splice(ci, 1);
+    state.editingCard = null;
+  }
+
+  if (!state.weeks[wi].days[di]) state.weeks[wi].days[di] = { cards: [] };
+  state.weeks[wi].days[di].cards.push(card);
+  closeAddModal();
+  saveState(); renderDaysGrid();
+  state.currentWeek = wi;
+  renderWeekTabs();
+  renderDaysGrid();
+  showToast('✓ Tópico adicionado!', 'success');
+}
+
+function editCard(wi, di, ci) {
+  state.editingCard = { wi, di, ci, card: state.weeks[wi].days[di].cards[ci] };
+  openAddModal();
+}
+
+function askDelete(wi, di, ci) {
+  state.deletingCard = { wi, di, ci };
+  document.getElementById('confirmModal').classList.add('open');
+}
+function closeConfirm() {
+  state.deletingCard = null;
+  document.getElementById('confirmModal').classList.remove('open');
+}
+function confirmDelete() {
+  const { wi, di, ci } = state.deletingCard;
+  state.weeks[wi].days[di].cards.splice(ci, 1);
+  closeConfirm();
+  saveState(); renderDaysGrid();
+  showToast('Tópico removido.', 'info');
+}
+
+// ─── VIEW SWITCH ───
+function switchView(v) {
+  state.currentView = v;
+  document.getElementById('daysView').style.display = v === 'days' ? '' : 'none';
+  document.getElementById('kanbanView').style.display = v === 'kanban' ? '' : 'none';
+  document.getElementById('btnViewDays').classList.toggle('active', v === 'days');
+  document.getElementById('btnViewKanban').classList.toggle('active', v === 'kanban');
+  if (v === 'kanban') renderKanban();
+}
+
+// ─── MATÉRIAS TAB ───
+function renderSubjects() {
+  const list = document.getElementById('subjectsList');
+  list.innerHTML = Object.entries(SUBJECTS).map(([key, subj]) => {
+    const topics = TOPICS[key] || [];
+    return `
+    <div class="subject-block">
+      <div class="subject-block-header" onclick="toggleSubject('sb-${key}')">
+        <div class="subject-dot" style="background:${subj.color}"></div>
+        <div class="subject-name">${subj.icon} ${subj.name}</div>
+        <div class="subject-meta">
+          <span class="subject-pts" style="color:${subj.color}">${subj.pts > 0 ? subj.pts + ' pts' : 'Eliminatória'}</span>
+          <span>${subj.qs > 0 ? subj.qs + ' questões' : ''}</span>
+          <span>${topics.length} tópicos</span>
+        </div>
+        <div class="subject-toggle" id="toggle-${key}">▼</div>
+      </div>
+      <div class="subject-body" id="sb-${key}">
+        <table class="topics-table">
+          <thead><tr>
+            <th>#</th><th>Tópico</th><th>Incidência Cesgranrio</th>
+          </tr></thead>
+          <tbody>${topics.map((t,i) => `
+          <tr>
+            <td class="topic-num">${i+1}</td>
+            <td>${t.t}</td>
+            <td><span class="tag ${incTagClass(t.inc)}">${incLabel(t.inc)}</span></td>
+          </tr>`).join('')}</tbody>
+        </table>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function toggleSubject(id) {
+  const el = document.getElementById(id);
+  const key = id.replace('sb-', '');
+  el.classList.toggle('open');
+  document.getElementById(`toggle-${key}`).classList.toggle('open');
+}
+
+// ─── CICLOS TAB ───
+const CYCLES = [
+  {
+    name: 'Dia Tipo A (Seg)',
+    note: 'LP + Vendas + Mat.Financeira',
+    items: [
+      { key: 'lp', time: '1h30min' },
+      { key: 'vn', time: '1h30min' },
+      { key: 'mf', time: '1h00min' },
+    ]
+  },
+  {
+    name: 'Dia Tipo B (Ter)',
+    note: 'Matemática + Conh.Bancários + Atualidades',
+    items: [
+      { key: 'mat', time: '1h20min' },
+      { key: 'cb',  time: '1h30min' },
+      { key: 'amf', time: '1h10min' },
+    ]
+  },
+  {
+    name: 'Dia Tipo C (Qua)',
+    note: 'Informática + Vendas + Mat.Financeira',
+    items: [
+      { key: 'inf', time: '1h30min' },
+      { key: 'vn',  time: '1h30min' },
+      { key: 'mf',  time: '1h00min' },
+    ]
+  },
+  {
+    name: 'Dia Tipo D (Qui)',
+    note: 'LP + Conh.Bancários + Atualidades',
+    items: [
+      { key: 'lp',  time: '1h30min' },
+      { key: 'cb',  time: '1h30min' },
+      { key: 'amf', time: '1h00min' },
+    ]
+  },
+  {
+    name: 'Dia Tipo E (Sex)',
+    note: 'Matemática + Informática + Inglês',
+    items: [
+      { key: 'mat', time: '1h20min' },
+      { key: 'inf', time: '1h30min' },
+      { key: 'li',  time: '1h10min' },
+    ]
+  },
+  {
+    name: 'Sábado (Redação)',
+    note: 'Redação + LP + Vendas',
+    items: [
+      { key: 'red', time: '1h30min' },
+      { key: 'lp',  time: '1h30min' },
+      { key: 'vn',  time: '1h00min' },
+    ]
+  },
+  {
+    name: 'Domingo',
+    note: 'Simulado + Revisão Geral',
+    items: [
+      { key: 'cb',  time: '1h00min' },
+      { key: 'inf', time: '1h00min' },
+      { key: 'vn',  time: '1h00min' },
+      { key: 'mf',  time: '1h00min' },
+    ]
+  },
+];
+
+function renderCycles() {
+  const grid = document.getElementById('cycleGrid');
+  grid.innerHTML = CYCLES.map(cycle => `
+  <div class="cycle-card">
+    <div class="cycle-card-header">
+      <span style="font-size:18px">📅</span>
+      <div>
+        <div class="cycle-card-title">${cycle.name}</div>
+        <div style="font-size:11px;color:var(--text-muted)">${cycle.note}</div>
+      </div>
+    </div>
+    <div class="cycle-card-body">
+      ${cycle.items.map(item => {
+        const s = SUBJECTS[item.key];
+        return `<div class="cycle-row">
+          <div class="cycle-sub-dot" style="background:${s.color}"></div>
+          <div class="cycle-sub-name">${s.icon} ${s.name}</div>
+          <div class="cycle-time">${item.time}</div>
+        </div>`;
+      }).join('')}
+      <div class="cycle-total">⏱ Total: ~4h</div>
+    </div>
+  </div>`).join('');
+}
+
+// ─── STATS TAB ───
+function renderStats() {
+  let totalTopics = 0, totalDone = 0, totalReview = 0, totalStarted = 0;
+  const bySubj = {};
+  Object.keys(SUBJECTS).forEach(k => { bySubj[k] = { total:0, done:0, review:0, started:0 }; });
+
+  state.weeks.forEach(week => {
+    week.days.forEach(day => {
+      (day.cards || []).forEach(card => {
+        totalTopics++;
+        const s = card.subject;
+        if (!bySubj[s]) bySubj[s] = { total:0, done:0, review:0, started:0 };
+        bySubj[s].total++;
+        if (card.status === 'Finalizado') { totalDone++; bySubj[s].done++; }
+        else if (card.status === 'Revisar') { totalReview++; bySubj[s].review++; }
+        else if (card.status === 'Iniciado') { totalStarted++; bySubj[s].started++; }
+      });
+    });
+  });
+
+  document.getElementById('overallStats').innerHTML = `
+    <div class="overall-card">
+      <div class="overall-num" style="color:var(--mat)">${totalDone}</div>
+      <div class="overall-label">Finalizados</div>
+    </div>
+    <div class="overall-card">
+      <div class="overall-num" style="color:var(--lp)">${totalStarted}</div>
+      <div class="overall-label">Iniciados</div>
+    </div>
+    <div class="overall-card">
+      <div class="overall-num" style="color:var(--med)">${totalReview}</div>
+      <div class="overall-label">Para Revisar</div>
+    </div>
+    <div class="overall-card">
+      <div class="overall-num" style="color:var(--text-muted)">${totalTopics}</div>
+      <div class="overall-label">Total Planejados</div>
+    </div>`;
+
+  document.getElementById('statsGrid').innerHTML = Object.entries(SUBJECTS).map(([k, subj]) => {
+    const d = bySubj[k] || { total:0,done:0,review:0,started:0 };
+    const pct = d.total ? Math.round(d.done/d.total*100) : 0;
+    return `
+    <div class="stat-card">
+      <div class="stat-card-top">
+        <div class="stat-icon" style="background:${subj.color}22;color:${subj.color}">${subj.icon}</div>
+        <div>
+          <div class="stat-label">${subj.name}</div>
+          <div style="font-size:11px;color:var(--text-muted)">${subj.pts > 0 ? subj.pts + ' pts · ' + subj.qs + ' questões' : 'Prova de Redação'}</div>
+        </div>
+      </div>
+      <div class="stat-nums">
+        <div><div class="stat-num" style="color:${subj.color}">${pct}%</div><div class="stat-num-label">Concluído</div></div>
+        <div><div class="stat-num">${d.done}</div><div class="stat-num-label">Feitos</div></div>
+        <div><div class="stat-num">${d.total}</div><div class="stat-num-label">Total</div></div>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" style="width:${pct}%;background:${subj.color}"></div></div>
+    </div>`;
+  }).join('');
+}
+
+// ─── TEMPO DE ESTUDOS ───
+function renderTimeWeekSelector() {
+  const sel = document.getElementById('timeWeekSelector');
+  sel.innerHTML = state.weeks.map((w, i) =>
+    `<button class="time-week-btn ${i===state.selectedTimeWeek?'active':''}" onclick="selectTimeWeek(${i})">${w.name}</button>`
+  ).join('');
+}
+
+function selectTimeWeek(i) {
+  state.selectedTimeWeek = i;
+  renderTimeWeekSelector();
+  renderTimeTable();
+}
+
+function renderTimeTable() {
+  renderTimeWeekSelector();
+  const week = state.weeks[state.selectedTimeWeek];
+  const tbody = document.getElementById('timeTableBody');
+  if (!week) { tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--text-muted);padding:20px">Nenhuma semana disponível</td></tr>'; return; }
+
+  const td = state.timeData[state.selectedTimeWeek] || {};
+  let html = '';
+
+  DAYS.forEach((dayName, di) => {
+    const day = week.days[di];
+    const cards = day?.cards || [];
+    
+    html += `<tr><td colspan="6" class="time-day-header">${dayName}${di===5?' – Redação':di===6?' – Simulado/Revisão':''}</td></tr>`;
+    
+    if (cards.length === 0) {
+      html += `<tr><td colspan="6" style="color:var(--text-dim);font-size:12px;padding:10px 14px;font-style:italic">Nenhum tópico planejado</td></tr>`;
+    } else {
+      cards.forEach((card, ci) => {
+        const subj = SUBJECTS[card.subject];
+        const topicObj = (TOPICS[card.subject]||[])[card.topicIdx] || { t: 'Tópico', inc: 'Média' };
+        const key = `${di}-${ci}`;
+        const saved = td[key] || {};
+        const hrs = saved.hrs || '';
+        const qs = saved.qs || '';
+        const err = saved.err || '';
+        const pctObj = calcPct(qs, err);
+
+        html += `<tr>
+          <td>
+            <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${subj.color};margin-right:6px"></span>
+            <strong style="font-family:'Outfit',sans-serif;font-size:12px;color:${subj.color}">${subj.name}</strong>
+          </td>
+          <td style="font-size:12px;max-width:180px">${topicObj.t}</td>
+          <td><input class="time-input" placeholder="00:00" value="${hrs}" 
+            oninput="updateTime(${state.selectedTimeWeek},'${key}','hrs',this.value)" /></td>
+          <td><input class="num-input" type="number" min="0" placeholder="0" value="${qs}"
+            oninput="updateTime(${state.selectedTimeWeek},'${key}','qs',this.value)"></td>
+          <td><input class="num-input" type="number" min="0" placeholder="0" value="${err}"
+            oninput="updateTime(${state.selectedTimeWeek},'${key}','err',this.value)"></td>
+          <td class="pct-cell ${pctObj.cls}" id="pct-${di}-${ci}">${pctObj.label}</td>
+        </tr>`;
+      });
+    }
+  });
+
+  tbody.innerHTML = html;
+}
+
+function calcPct(qs, err) {
+  const q = parseInt(qs), e = parseInt(err);
+  if (!q || isNaN(q) || q <= 0) return { label: '—', cls: '' };
+  const errs = isNaN(e) ? 0 : e;
+  const pct = Math.round(((q - errs) / q) * 100);
+  if (pct < 70) return { label: pct + '%', cls: 'pct-red' };
+  if (pct <= 80) return { label: pct + '%', cls: 'pct-yellow' };
+  return { label: pct + '%', cls: 'pct-green' };
+}
+
+function updateTime(wi, key, field, val) {
+  if (!state.timeData[wi]) state.timeData[wi] = {};
+  if (!state.timeData[wi][key]) state.timeData[wi][key] = {};
+  state.timeData[wi][key][field] = val;
+  // Recalculate pct
+  const [di, ci] = key.split('-');
+  const saved = state.timeData[wi][key];
+  const pctObj = calcPct(saved.qs, saved.err);
+  const pctEl = document.getElementById(`pct-${di}-${ci}`);
+  if (pctEl) { pctEl.textContent = pctObj.label; pctEl.className = `pct-cell ${pctObj.cls}`; }
+}
+
+function saveTimeData() { saveState(); showToast('✓ Dados salvos!', 'success'); }
+
+// ─── TOAST ───
+function showToast(msg, type='info') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = `toast ${type} show`;
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+
+// ═══════════════════════════════════════════════════════════
+// EXPORT / IMPORT
+// ═══════════════════════════════════════════════════════════
+
+// ─── EXPORT ───
+function exportJSON() {
+  const exportData = {
+    _meta: {
+      app: 'BB Planner – Escriturário',
+      version: '2.0',
+      exportedAt: new Date().toISOString(),
+      exportedAtBR: new Date().toLocaleString('pt-BR'),
+      totalWeeks: state.weeks.length,
+      totalCards: countTotalCards(),
+    },
+    state: {
+      weeks: state.weeks,
+      timeData: state.timeData,
+    }
+  };
+
+  const json = JSON.stringify(exportData, null, 2);
+  const blob = new Blob([json], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+
+  const datePart = new Date().toISOString().slice(0,10);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `bb_planner_backup_${datePart}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+
+  updateLastSaved('Exportado em ' + new Date().toLocaleString('pt-BR'));
+  showToast('✓ Backup exportado com sucesso!', 'success');
+}
+
+function countTotalCards() {
+  let n = 0;
+  state.weeks.forEach(w => w.days.forEach(d => { n += (d.cards||[]).length; }));
+  return n;
+}
+
+function updateLastSaved(msg) {
+  const el = document.getElementById('lastSavedLabel');
+  if (el) el.textContent = msg;
+}
+
+// ─── IMPORT MODAL ───
+let _pendingImport = null;
+
+function openImportModal() {
+  _pendingImport = null;
+  document.getElementById('importPreview').classList.remove('visible');
+  document.getElementById('importFileInput').value = '';
+  const btn = document.getElementById('btnConfirmImport');
+  btn.disabled = true; btn.style.opacity = '.4'; btn.style.cursor = 'not-allowed';
+  document.getElementById('importModal').classList.add('open');
+}
+
+function closeImportModal() {
+  _pendingImport = null;
+  document.getElementById('importModal').classList.remove('open');
+}
+
+// ─── DRAG OVER DROP ZONE ───
+function dropZoneDragOver(e) {
+  e.preventDefault();
+  document.getElementById('dropZone').classList.add('dragover');
+}
+function dropZoneDragLeave(e) {
+  document.getElementById('dropZone').classList.remove('dragover');
+}
+function dropZoneDrop(e) {
+  e.preventDefault();
+  document.getElementById('dropZone').classList.remove('dragover');
+  const file = e.dataTransfer.files[0];
+  if (file) processImportFile(file);
+}
+
+// ─── FILE SELECT ───
+function handleFileSelect(e) {
+  const file = e.target.files[0];
+  if (file) processImportFile(file);
+}
+
+function processImportFile(file) {
+  if (!file.name.endsWith('.json')) {
+    showToast('❌ Apenas arquivos .json são aceitos.', 'info');
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const parsed = JSON.parse(e.target.result);
+      validateAndPreview(parsed);
+    } catch(err) {
+      showToast('❌ Arquivo inválido ou corrompido.', 'info');
+      document.getElementById('importPreview').classList.remove('visible');
+      const btn = document.getElementById('btnConfirmImport');
+      btn.disabled = true; btn.style.opacity = '.4'; btn.style.cursor = 'not-allowed';
+    }
+  };
+  reader.readAsText(file);
+}
+
+function validateAndPreview(parsed) {
+  // Validate structure
+  if (!parsed.state || !Array.isArray(parsed.state.weeks)) {
+    showToast('❌ Arquivo não reconhecido. Exporte novamente do planner.', 'info');
+    return;
+  }
+
+  _pendingImport = parsed;
+
+  // Count stats
+  let cards = 0, done = 0, weeks = parsed.state.weeks.length;
+  parsed.state.weeks.forEach(w => {
+    (w.days || []).forEach(d => {
+      (d.cards || []).forEach(c => {
+        cards++;
+        if (c.status === 'Finalizado') done++;
+      });
+    });
+  });
+
+  const meta = parsed._meta || {};
+  const exportedAt = meta.exportedAtBR || 'Data não registrada';
+
+  document.getElementById('importPreviewInfo').innerHTML = `
+    📅 Exportado em: <strong>${exportedAt}</strong><br>
+    📆 Semanas: <strong>${weeks}</strong><br>
+    🗂 Tópicos planejados: <strong>${cards}</strong><br>
+    ✅ Finalizados: <strong>${done}</strong><br>
+    🏷 Versão do arquivo: <strong>${meta.version || '—'}</strong>
+  `;
+
+  document.getElementById('importPreview').classList.add('visible');
+
+  const btn = document.getElementById('btnConfirmImport');
+  btn.disabled = false; btn.style.opacity = '1'; btn.style.cursor = 'pointer';
+}
+
+function confirmImport() {
+  if (!_pendingImport) return;
+
+  const imported = _pendingImport.state;
+  state.weeks = imported.weeks;
+  state.timeData = imported.timeData || {};
+  state.currentWeek = 0;
+  state.selectedTimeWeek = 0;
+
+  saveState();
+  closeImportModal();
+
+  // Re-render everything
+  renderWeekTabs();
+  renderDaysGrid();
+  renderStats();
+  renderTimeWeekSelector();
+  renderTimeTable();
+
+  updateLastSaved('Importado em ' + new Date().toLocaleString('pt-BR'));
+  showToast('✓ Planejamento importado com sucesso!', 'success');
+}
+
+// ─── INIT ───
+function init() {
+  loadState();
+  renderWeekTabs();
+  renderDaysGrid();
+  renderSubjects();
+  renderCycles();
+  renderTimeWeekSelector();
+
+  // Fill subject select in modal
+  const fSubject = document.getElementById('fSubject');
+  fSubject.innerHTML = Object.entries(SUBJECTS).map(([k,v]) =>
+    `<option value="${k}">${v.icon} ${v.name}</option>`
+  ).join('');
+  updateTopicList();
+
+  // Close modal on overlay click
+  document.getElementById('addModal').addEventListener('click', e => {
+    if (e.target === document.getElementById('addModal')) closeAddModal();
+  });
+}
+
+init();
+</script>
+</body>
+</html>
